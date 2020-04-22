@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import Container from 'react-bootstrap/Container'
 import { handleInitialData } from '../actions/shared'
 import Dashboard from './Dashboard'
 import Login from './Login'
@@ -12,9 +13,9 @@ class App extends Component {
   render() {
     const { authedUser } = this.props
     return (
-      <div className='container'>
+      <Container fluid className='app container'>
         {!authedUser ? <Login /> : <Dashboard />}
-      </div>
+      </Container>
     )
   }
 }

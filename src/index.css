@@ -17,6 +17,10 @@ a {
   color: #252525;
 }
 
+#users-dropdown {
+  margin-bottom: 20px;
+}
+
 .container {
   max-width: 1000px;
   margin: 0 auto;
@@ -29,9 +33,8 @@ a {
 }
 
 .login {
-  border: 1px solid black;
-  width: 250px;
-  height: 250px;
+  width: 350px;
+  height: 300px;
   margin-top: 150px;
 }
 

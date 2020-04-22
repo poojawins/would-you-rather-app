@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Button, Form } from 'react-bootstrap'
 import { setAuthedUser } from '../actions/authedUser'
 
 class Login extends Component {
@@ -26,21 +27,14 @@ class Login extends Component {
           <h2>Welcome to Would You Rather</h2>
           <p>Please sign in to continue</p>
         </div>
-        <form className='login-form' onSubmit={this.handleSubmit}>
+        <Form className='login-form' onSubmit={this.handleSubmit}>
           <h3>Sign In</h3>
           <select id='users-dropdown' value={this.state.userID} onChange={this.handleChange}>
             <option value='' disabled>Select a user</option>
             {Object.values(users).map((user) => <option key={user.id} value={user.id}>{user.name}</option>)}
           </select>
-          <div>
-            <button
-              className='btn'
-              type='submit'
-              disabled={false}>
-              Login
-            </button>
-          </div>
-        </form>
+          <Button type='submit' block>Login</Button>
+        </Form>
       </div>
     )
   }

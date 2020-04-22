@@ -1,19 +1,21 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Container, Tabs, Tab } from 'react-bootstrap'
 import Nav from './Nav'
+import QuestionsList from './QuestionsList'
 
 function Dashboard ({ authedUser, users, questions }) {
   return (
-    <div className='container'>
+    <Container fluid className='dashboard'>
       <Nav />
       <div className='centered'>
-        <div>
-          <a href='/#' className='active'>Unanswered</a>
-          <a href='/#' className=''>Answered</a>
-        </div>
-
+        <Tabs>
+          <Tab eventKey='unanswered' title='Unanswered'></Tab>
+          <Tab eventKey='answered' title='Answered'></Tab>
+        </Tabs>
+        <QuestionsList />
       </div>
-    </div>
+    </Container>
   )
 }
 
