@@ -38,6 +38,11 @@ a {
   margin-top: 150px;
 }
 
+.question-preview {
+  margin-bottom: 10px;
+  max-width: 600px;
+}
+
 .navigation {
   margin-bottom: 20px;
 }
