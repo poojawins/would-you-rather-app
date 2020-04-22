@@ -43,16 +43,11 @@ a {
   max-width: 600px;
 }
 
+.new-question-form {
+  margin-bottom: 10px;
+  max-width: 600px;
+}
+
 .navigation {
   margin-bottom: 20px;
-}
-
-ul {
-  padding-left: 0;
-}
-
-li {
-  list-style-type: none;
-  padding: 10px;
-  text-decoration: none;
 }
