@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import Dashboard from './Dashboard'
 import Login from './Login'
-import Nav from './Nav'
 
 class App extends Component {
   componentDidMount() {
@@ -14,7 +13,6 @@ class App extends Component {
     const { authedUser } = this.props
     return (
       <div className='container'>
-        <Nav />
         {!authedUser ? <Login /> : <Dashboard />}
       </div>
     )
