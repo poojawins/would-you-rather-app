@@ -38,15 +38,8 @@ a {
   margin-top: 150px;
 }
 
-.nav ul {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  text-decoration: none;
-}
-
-.nav li:first-child {
-  padding-left: 0;
+.navigation {
+  margin-bottom: 20px;
 }
 
 ul {
