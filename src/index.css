@@ -23,6 +23,24 @@ a {
   padding: 10px;
 }
 
+.center {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.login {
+  border: 1px solid black;
+  width: 250px;
+  height: 250px;
+  margin-top: 150px;
+}
+
+.dashboard {
+  border: 1px solid black;
+  max-width: 550px;
+  margin-top: 50px;
+}
+
 .nav ul {
   display: flex;
   flex-direction: row;
