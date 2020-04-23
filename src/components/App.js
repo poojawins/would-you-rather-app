@@ -25,13 +25,15 @@ class App extends Component {
             ? <Login />
             : <Fragment>
                 <Navigation />
-                <Switch>
-                  <Route exact path='/' component={Dashboard} />
-                  <Route path='/add' component={NewQuestion} />
-                  <Route path='/leaderboard' component={Leaderboard} />
-                  <Route path='/questions/:id' component={Question} />
-                  <Route path='*' component={PageNotFound} />
-                </Switch>
+                <div className='centered-content'>
+                  <Switch>
+                    <Route exact path='/' component={Dashboard} />
+                    <Route path='/add' component={NewQuestion} />
+                    <Route path='/leaderboard' component={Leaderboard} />
+                    <Route path='/questions/:id' component={Question} />
+                    <Route path='*' component={PageNotFound} />
+                  </Switch>
+                </div>
               </Fragment>
           }
         </Container>

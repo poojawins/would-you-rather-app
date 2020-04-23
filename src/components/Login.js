@@ -22,7 +22,7 @@ class Login extends Component {
     const { users } = this.props
 
     return (
-      <div className='login center'>
+      <div className='login centered-content'>
         <div className='login-header'>
           <h2>Welcome to Would You Rather</h2>
           <p>Please sign in to continue</p>

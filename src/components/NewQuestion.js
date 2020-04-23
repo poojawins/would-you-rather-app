@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Form } from 'react-bootstrap'
+import { Button, Card, Form } from 'react-bootstrap'
 import { handleAddQuestion } from '../actions/questions'
 
 class NewQuestion extends Component {
@@ -29,34 +29,36 @@ class NewQuestion extends Component {
 
   render () {
     return (
-      <div className='new-question container'>
-        <h2>Create a New Question</h2>
-        <Form className='new-question-form'>
-          <h3>Would you rather...</h3>
-          <div>
-            <input
-              id='option-one'
-              type='text'
-              value={this.state.optionOne}
-              placeholder='Enter option one...'
-              onChange={this.handleChangeOptionOne}
-              required
-            />
-          </div>
-          <p>OR</p>
-          <div>
-            <input
-              id='option-two'
-              type='text'
-              value={this.state.optionTwo}
-              placeholder='Enter option two...'
-              onChange={this.handleChangeOptionTwo}
-              required
-            />
-          </div>
-          <Button onSubmit={this.handleSubmit}>Submit</Button>
-        </Form>
-      </div>
+      <Card className='new-question'>
+        <Card.Header>Create a New Question</Card.Header>
+        <Card.Body>
+          <Form className='new-question-form'>
+            <h3>Would you rather...</h3>
+            <div>
+              <input
+                id='option-one'
+                type='text'
+                value={this.state.optionOne}
+                placeholder='Enter option one...'
+                onChange={this.handleChangeOptionOne}
+                required
+              />
+            </div>
+            <p>OR</p>
+            <div>
+              <input
+                id='option-two'
+                type='text'
+                value={this.state.optionTwo}
+                placeholder='Enter option two...'
+                onChange={this.handleChangeOptionTwo}
+                required
+              />
+            </div>
+          </Form>
+        </Card.Body>
+        <Button onSubmit={this.handleSubmit}>Submit</Button>
+      </Card>
     )
   }
 }

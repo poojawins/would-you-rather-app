@@ -6,13 +6,11 @@ import QuestionsList from './QuestionsList'
 function Dashboard ({ authedUser, users, questions }) {
   return (
     <Container fluid className='dashboard'>
-      <div className='centered'>
-        <Tabs>
-          <Tab eventKey='unanswered' title='Unanswered'></Tab>
-          <Tab eventKey='answered' title='Answered'></Tab>
-        </Tabs>
-        <QuestionsList />
-      </div>
+      <Tabs>
+        <Tab eventKey='unanswered' title='Unanswered'></Tab>
+        <Tab eventKey='answered' title='Answered'></Tab>
+      </Tabs>
+      <QuestionsList />
     </Container>
   )
 }

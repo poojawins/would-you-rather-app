@@ -22,30 +22,32 @@ a {
 }
 
 .container {
-  max-width: 1000px;
   margin: 0 auto;
+  max-width: 1000px;
   padding: 10px;
 }
 
-.center {
-  text-align: center;
+.centered-content {
   margin: 0 auto;
+  max-width: 650px;
+  text-align: center;
 }
 
 .login {
-  width: 350px;
   height: 300px;
   margin-top: 150px;
+  width: 350px;
 }
 
-.question-preview {
+.question-preview,
+.user {
   margin-bottom: 10px;
-  max-width: 600px;
+  max-width: 650px;
 }
 
 .new-question-form {
   margin-bottom: 10px;
-  max-width: 600px;
+  max-width: 650px;
 }
 
 .navigation {

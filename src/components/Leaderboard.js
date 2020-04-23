@@ -4,7 +4,7 @@ import User from './User'
 
 function Leaderboard ({ users }) {
   return (
-    <div className='leaderboard center'>
+    <div className='leaderboard'>
       <h2>Leaderboard</h2>
       {Object.values(users).map((user) =>
         <User key={user.id} user={user} />)
