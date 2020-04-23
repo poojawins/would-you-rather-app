@@ -9,6 +9,7 @@ export default function User (props) {
     <Card className='user'>
       <Card.Header>{props.user.name}</Card.Header>
       <Card.Body>
+        <img src={props.user.avatarURL} className='avatar' alt='' />
         <p>Answered {answersLength} Questions</p>
         <p>Asked {questionsLength} Questions</p>
         <p>Score: {score}</p>
