@@ -1,21 +1,29 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import QuestionPreview from './QuestionPreview'
 
-function QuestionsList ({ users, questions }) {
-  return (
-    <div className='question-list'>
-      {Object.values(questions).map((question) =>
-        <QuestionPreview key={question.id} question={question} />)
-      }
-    </div>
-  )
+class QuestionsList extends Component {
+  render() {
+    const { activeTab, questions } = this.props
+
+    let filteredQuestions = questions && Object.values(questions)
+
+    return (
+      <div className='question-list'>
+        {Object.values(filteredQuestions).map((question) =>
+          <QuestionPreview key={question.id} question={question} activeTab={activeTab} />)
+        }
+      </div>
+    )
+  }
 }
 
-function mapStateToProps ({ users, questions }) {
+function mapStateToProps ({ authedUser, questions, users }) {
   return {
-    users,
-    questions
+    authedUser,
+    currentUser: users[authedUser],
+    questions,
+    users
   }
 }
 
