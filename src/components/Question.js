@@ -1,32 +1,86 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Button, Card } from 'react-bootstrap'
+import { Button, Card, Form } from 'react-bootstrap'
+import { Redirect } from 'react-router-dom'
+import { handleAddQuestionAnswer } from '../actions/questions'
 
 class Question extends Component {
+  state = {
+    selectedAnswer: '',
+    toResult: false,
+    toHome: false
+  }
+
+  handleSelect = (e) => {
+    this.setState({ selectedAnswer: e.target.value })
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+    const { dispatch } = this.props
+
+    dispatch(handleAddQuestionAnswer({
+      answer: this.state.selectedAnswer,
+      qid: this.props.match.params.question_id
+    }))
+
+    this.setState({
+      selectedAnswer: '',
+      toResult: true
+    })
+  }
+
   render() {
-    const { match, questions, users } = this.props
+    const { authedUser, match, questions, users } = this.props
     const questionID = match.params.question_id
     const question = questions && questions[questionID]
     const author = question && users[question.author]
+
+    if (this.state.toHome === true) {
+      return <Redirect to='/' />
+    }
+
+    if (this.state.toResult === true) {
+      return <Redirect to={`/questions/${questionID}`} />
+    }
 
     return (
       <Card className='question'>
         <Card.Header>{author && author.name} asks:</Card.Header>
         <Card.Body>
-          <img className='avatar large' src={author && author.avatarURL} alt='' />
-          <h3>Would you rather</h3>
-          <p>{question && question.optionOne.text}</p>
-          <p>OR</p>
-          <p>{question && question.optionTwo.text}</p>
+          <Form className='question-answer-form' onSubmit={this.handleSubmit}>
+            <img className='avatar large' src={author && author.avatarURL} alt='' />
+            <h3>Would you rather</h3>
+            <div key='default-radio' className='radio-inputs'>
+              <Form.Check
+                type='radio'
+                id='optionOne'
+                name="formHorizontalRadios"
+                value='optionOne'
+                onChange={this.handleSelect}
+                label={question && question.optionOne.text}
+              />
+              <Form.Check
+                type='radio'
+                id='optionTwo'
+                name="formHorizontalRadios"
+                value='optionTwo'
+                onChange={this.handleSelect}
+                label={question && question.optionTwo.text}
+              />
+            </div>
+            <Button type='submit'>Submit</Button>
+          </Form>
         </Card.Body>
-        <Button>Submit</Button>
+
       </Card>
     )
   }
 }
 
-function mapStateToProps ({ questions, users }) {
+function mapStateToProps ({ authedUser, questions, users }) {
   return {
+    authedUser,
     questions,
     users
   }
