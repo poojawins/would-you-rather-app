@@ -19,10 +19,7 @@ class Question extends Component {
     e.preventDefault()
     const { dispatch } = this.props
 
-    dispatch(handleAddQuestionAnswer({
-      answer: this.state.selectedAnswer,
-      qid: this.props.match.params.question_id
-    }))
+    dispatch(handleAddQuestionAnswer(this.props.match.params.question_id, this.state.selectedAnswer))
 
     this.setState({
       selectedAnswer: '',

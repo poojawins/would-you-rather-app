@@ -18,11 +18,12 @@ export function addQuestion (question) {
   }
 }
 
-export function addAnswer ({ answer, qid }) {
+export function addAnswer ({ answer, authedUser, qid }) {
   return {
     type: ADD_ANSWER,
     answerData: {
       answer,
+      authedUser,
       qid
     }
   }
@@ -41,7 +42,7 @@ export function handleAddQuestion(optionOne, optionTwo) {
   }
 }
 
-export function handleAddQuestionAnswer(answer, qid) {
+export function handleAddQuestionAnswer(qid, answer) {
   return (dispatch, getState) => {
     const { authedUser } = getState()
 
