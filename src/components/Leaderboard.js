@@ -14,8 +14,13 @@ function Leaderboard ({ users }) {
 }
 
 function mapStateToProps ({ users }) {
+  const usersWithScore = Object.values(users).map((user) => ({
+    ...user,
+    score: Object.keys(user.answers).length + user.questions.length
+  })).sort((a, b) => b.score - a.score)
+
   return {
-    users
+    users: usersWithScore
   }
 }
 

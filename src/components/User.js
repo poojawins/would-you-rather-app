@@ -1,18 +1,15 @@
 import React from 'react'
 import { Card } from 'react-bootstrap'
 
-export default function User (props) {
-  const answersLength = Object.keys(props.user.answers).length
-  const questionsLength = props.user.questions.length
-  const score = answersLength + questionsLength
+export default function User ({ user }) {
   return (
     <Card className='user'>
-      <Card.Header>{props.user.name}</Card.Header>
+      <Card.Header>{user.name}</Card.Header>
       <Card.Body>
-        <img src={props.user.avatarURL} className='avatar' alt='' />
-        <p>Answered {answersLength} Questions</p>
-        <p>Asked {questionsLength} Questions</p>
-        <p>Score: {score}</p>
+        <img src={user.avatarURL} className='avatar' alt='' />
+        <p>Answered {Object.keys(user.answers).length} Questions</p>
+        <p>Asked {user.questions.length} Questions</p>
+        <p>Score: {user.score}</p>
       </Card.Body>
     </Card>
   )
