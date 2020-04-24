@@ -1,26 +1,27 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { Container, Tabs, Tab } from 'react-bootstrap'
+import React, { Component } from 'react'
+import { Container, Tab, Tabs } from 'react-bootstrap'
 import QuestionsList from './QuestionsList'
 
-function Dashboard ({ authedUser, users, questions }) {
-  return (
-    <Container fluid className='dashboard'>
-      <Tabs>
-        <Tab eventKey='unanswered' title='Unanswered'></Tab>
-        <Tab eventKey='answered' title='Answered'></Tab>
-      </Tabs>
-      <QuestionsList />
-    </Container>
-  )
-}
+class Dashboard extends Component {
+  state = {
+    key: 'unanswered'
+  }
 
-function mapStateToProps ({ authedUser, users, questions }) {
-  return {
-    authedUser,
-    users,
-    questions
+  setKey (key) {
+    this.setState({ key: key })
+  }
+
+  render() {
+    return (
+      <Container fluid className='dashboard'>
+        <Tabs activeKey={this.state.key} onSelect={(k) =>this.setKey(k)}>
+          <Tab eventKey='unanswered' title='Unanswered'></Tab>
+          <Tab eventKey='answered' title='Answered'></Tab>
+        </Tabs>
+        <QuestionsList activeTab={this.state.key} />
+      </Container>
+    )
   }
 }
 
-export default connect(mapStateToProps)(Dashboard)
+export default Dashboard
