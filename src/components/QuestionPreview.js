@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Button, Card } from 'react-bootstrap'
 
@@ -15,7 +16,7 @@ class QuestionPreview extends Component {
           <h3>Would you rather</h3>
           <p>{question.optionOne.text} or...</p>
         </Card.Body>
-        <Button href={`/questions/${question.id}`}>{buttonText}</Button>
+        <Link to={`/questions/${question.id}`}><Button>{buttonText}</Button></Link>
       </Card>
     )
   }

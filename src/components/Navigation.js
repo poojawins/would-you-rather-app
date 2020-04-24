@@ -9,9 +9,9 @@ function Navigation ({ currentUser, dispatch }) {
     <Navbar className='navigation' bg='dark' variant='dark'>
       <Navbar.Brand>Would You Rather</Navbar.Brand>
       <Nav>
-        <NavLink component={Nav.Link} to='/' exact>Home</NavLink>
-        <NavLink component={Nav.Link} to='/add'>New Question</NavLink>
-        <NavLink component={Nav.Link} to='/leaderboard'>Leaderboard</NavLink>
+        <Nav.Link as={NavLink} to='/' exact>Home</Nav.Link>
+        <Nav.Link as={NavLink} to='/add'>New Question</Nav.Link>
+        <Nav.Link as={NavLink} to='/leaderboard'>Leaderboard</Nav.Link>
       </Nav>
       <Navbar.Collapse className='justify-content-end'>
         <img className='avatar small' src={currentUser && currentUser.avatarURL} alt='' />
