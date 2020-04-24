@@ -4,13 +4,21 @@ import QuestionPreview from './QuestionPreview'
 
 class QuestionsList extends Component {
   render() {
-    const { activeTab, questions } = this.props
+    const { activeTab, currentUser, questions } = this.props
+    const authedUserAnsweredQuestions = currentUser && Object.keys(currentUser.answers)
+    let filteredQuestions = questions
 
-    let filteredQuestions = questions && Object.values(questions)
+    if (activeTab && activeTab === 'answered') {
+      filteredQuestions = questions && Object.values(questions).filter((question) => authedUserAnsweredQuestions.includes(question.id))
+    }
+
+    if (activeTab && activeTab === 'unanswered') {
+      filteredQuestions = questions && Object.values(questions).filter((question) => !authedUserAnsweredQuestions.includes(question.id))
+    }
 
     return (
       <div className='question-list'>
-        {Object.values(filteredQuestions).map((question) =>
+        {filteredQuestions && Object.values(filteredQuestions).map((question) =>
           <QuestionPreview key={question.id} question={question} activeTab={activeTab} />)
         }
       </div>
@@ -20,10 +28,8 @@ class QuestionsList extends Component {
 
 function mapStateToProps ({ authedUser, questions, users }) {
   return {
-    authedUser,
     currentUser: users[authedUser],
-    questions,
-    users
+    questions
   }
 }
 
