@@ -7,8 +7,7 @@ import { handleAddQuestionAnswer } from '../actions/questions'
 class Question extends Component {
   state = {
     selectedAnswer: '',
-    toResult: false,
-    toHome: false
+    toResult: false
   }
 
   handleSelect = (e) => {
@@ -27,49 +26,60 @@ class Question extends Component {
     })
   }
 
+  renderForm(question) {
+    return (
+      <Form className='question-answer-form' onSubmit={this.handleSubmit}>
+        <div key='default-radio' className='radio-inputs'>
+          <Form.Check
+            type='radio'
+            id='optionOne'
+            name="formHorizontalRadios"
+            value='optionOne'
+            onChange={this.handleSelect}
+            label={question && question.optionOne.text}
+          />
+          <Form.Check
+            type='radio'
+            id='optionTwo'
+            name="formHorizontalRadios"
+            value='optionTwo'
+            onChange={this.handleSelect}
+            label={question && question.optionTwo.text}
+          />
+        </div>
+        <Button type='submit'>Submit</Button>
+      </Form>
+    )
+  }
+
+  renderResult(question) {
+    return (
+      <div>Result is here</div>
+    )
+  }
+
   render() {
-    const { authedUser, match, questions, users } = this.props
+    const { currentUser, match, questions, users } = this.props
     const questionID = match.params.question_id
     const question = questions && questions[questionID]
     const author = question && users[question.author]
-
-    if (this.state.toHome === true) {
-      return <Redirect to='/' />
-    }
+    const currentUserAnsweredQuestions = currentUser && Object.keys(currentUser.answers)
+    const currentUserAnsweredCurrentQuestion = currentUserAnsweredQuestions && currentUserAnsweredQuestions.includes(questionID)
 
     if (this.state.toResult === true) {
       return <Redirect to={`/questions/${questionID}`} />
     }
 
+    const body = currentUserAnsweredCurrentQuestion ? this.renderResult(question) : this.renderForm(question)
+
     return (
       <Card className='question'>
         <Card.Header>{author && author.name} asks:</Card.Header>
         <Card.Body>
-          <Form className='question-answer-form' onSubmit={this.handleSubmit}>
-            <img className='avatar large' src={author && author.avatarURL} alt='' />
-            <h3>Would you rather</h3>
-            <div key='default-radio' className='radio-inputs'>
-              <Form.Check
-                type='radio'
-                id='optionOne'
-                name="formHorizontalRadios"
-                value='optionOne'
-                onChange={this.handleSelect}
-                label={question && question.optionOne.text}
-              />
-              <Form.Check
-                type='radio'
-                id='optionTwo'
-                name="formHorizontalRadios"
-                value='optionTwo'
-                onChange={this.handleSelect}
-                label={question && question.optionTwo.text}
-              />
-            </div>
-            <Button type='submit'>Submit</Button>
-          </Form>
+          <img className='avatar large' src={author && author.avatarURL} alt='' />
+          <h3>Would you rather</h3>
+          {body}
         </Card.Body>
-
       </Card>
     )
   }
@@ -77,7 +87,7 @@ class Question extends Component {
 
 function mapStateToProps ({ authedUser, questions, users }) {
   return {
-    authedUser,
+    currentUser: users[authedUser],
     questions,
     users
   }
