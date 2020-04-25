@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Button, Card, Form } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { handleAddQuestionAnswer } from '../actions/questions'
+import PageNotFound from './PageNotFound'
 
 class Question extends Component {
   state = {
@@ -81,6 +82,11 @@ class Question extends Component {
     const { currentUser, match, questions, users } = this.props
     const questionID = match.params.question_id
     const question = questions && questions[questionID]
+
+    if (typeof question === 'undefined') {
+      return <PageNotFound to='/' />
+    }
+
     const author = question && users[question.author]
     const currentUserAnsweredQuestions = currentUser && Object.keys(currentUser.answers)
     const currentUserAnsweredCurrentQuestion = currentUserAnsweredQuestions && currentUserAnsweredQuestions.includes(questionID)

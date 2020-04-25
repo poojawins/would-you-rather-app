@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Button } from 'react-bootstrap'
 
 export default function PageNotFound () {
   return (
@@ -8,7 +9,7 @@ export default function PageNotFound () {
       <p>
         Looks like you've followed a broken link or entered a URL that doesn't exist on this site.
       </p>
-      <Link to='/' exact>Back to our site</Link>
+      <Link to='/'><Button>Back to our site</Button></Link>
     </div>
   )
 }
