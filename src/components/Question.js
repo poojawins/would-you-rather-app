@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Button, Card, Form } from 'react-bootstrap'
-import { Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { handleAddQuestionAnswer } from '../actions/questions'
 
 class Question extends Component {
@@ -17,13 +17,13 @@ class Question extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     const { dispatch } = this.props
-
-    dispatch(handleAddQuestionAnswer(this.props.match.params.question_id, this.state.selectedAnswer))
-
-    this.setState({
-      selectedAnswer: '',
-      toResult: true
-    })
+    if (this.state.selectedAnswer !== '') {
+      dispatch(handleAddQuestionAnswer(this.props.match.params.question_id, this.state.selectedAnswer))
+      this.setState({
+        selectedAnswer: '',
+        toResult: true
+      })
+    }
   }
 
   renderForm(question) {
@@ -53,8 +53,29 @@ class Question extends Component {
   }
 
   renderResult(question) {
+    const optionOneVotes = question && question.optionOne.votes.length
+    const optionTwoVotes = question && question.optionTwo.votes.length
+    const totalVotes = optionOneVotes + optionTwoVotes
+    const answer = this.props.currentUser.answers[question.id]
+
     return (
-      <div>Result is here</div>
+      <div className='question-result'>
+        <div className='result-row'>
+          <div hidden={answer !== 'optionOne'}>Your Vote</div>
+          <div>{question && question.optionOne.text}</div>
+          <div>Votes: {optionOneVotes} out of {totalVotes}</div>
+          <div>{(optionOneVotes/totalVotes) * 100} Percent</div>
+        </div>
+        <div className='result-row'>
+          <div hidden={answer !== 'OptionTwo'}>Your Vote</div>
+          <div>{question && question.optionTwo.text}</div>
+          <div>Votes: {optionTwoVotes} out of {totalVotes}</div>
+          <div>{(optionTwoVotes/totalVotes) * 100} Percent</div>
+        </div>
+        <div>
+          <Link to='/'><Button>Back</Button></Link>
+        </div>
+      </div>
     )
   }
 
