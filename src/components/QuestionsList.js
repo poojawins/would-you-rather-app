@@ -9,11 +9,11 @@ class QuestionsList extends Component {
     let filteredQuestions = questions
 
     if (activeTab && activeTab === 'answered') {
-      filteredQuestions = questions && Object.values(questions).filter((question) => authedUserAnsweredQuestions.includes(question.id))
+      filteredQuestions = filteredQuestions && Object.values(filteredQuestions).filter((question) => authedUserAnsweredQuestions.includes(question.id)).sort((a, b) => b.timestamp - a.timestamp)
     }
 
     if (activeTab && activeTab === 'unanswered') {
-      filteredQuestions = questions && Object.values(questions).filter((question) => !authedUserAnsweredQuestions.includes(question.id))
+      filteredQuestions = filteredQuestions && Object.values(filteredQuestions).filter((question) => !authedUserAnsweredQuestions.includes(question.id)).sort((a, b) => b.timestamp - a.timestamp)
     }
 
     return (
