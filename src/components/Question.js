@@ -6,8 +6,7 @@ import { handleAddQuestionAnswer } from '../actions/questions'
 
 class Question extends Component {
   state = {
-    selectedAnswer: '',
-    toResult: false
+    selectedAnswer: ''
   }
 
   handleSelect = (e) => {
@@ -20,8 +19,7 @@ class Question extends Component {
     if (this.state.selectedAnswer !== '') {
       dispatch(handleAddQuestionAnswer(this.props.match.params.question_id, this.state.selectedAnswer))
       this.setState({
-        selectedAnswer: '',
-        toResult: true
+        selectedAnswer: ''
       })
     }
   }
@@ -86,11 +84,6 @@ class Question extends Component {
     const author = question && users[question.author]
     const currentUserAnsweredQuestions = currentUser && Object.keys(currentUser.answers)
     const currentUserAnsweredCurrentQuestion = currentUserAnsweredQuestions && currentUserAnsweredQuestions.includes(questionID)
-
-    if (this.state.toResult === true) {
-      return <Redirect to={`/questions/${questionID}`} />
-    }
-
     const body = currentUserAnsweredCurrentQuestion ? this.renderResult(question) : this.renderForm(question)
 
     return (
